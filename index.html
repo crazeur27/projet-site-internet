@@ -1,216 +1,866 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>AD Pizza</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-    <style>
-      
-      body {
-      font-family: 'lato', sans-serif;
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dupont Plomberie — Plombier professionnel</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        background-color: #f5f5f5;
-        color: #333;
-        max-width: 900px;
-        margin: 0 auto;
+    :root {
+      --blue-dark:   #0b2545;
+      --blue-mid:    #1a4a8a;
+      --blue:        #2563eb;
+      --blue-light:  #3b82f6;
+      --blue-pale:   #eff6ff;
+      --accent:      #f59e0b;
+      --text:        #1e293b;
+      --text-light:  #64748b;
+      --white:       #ffffff;
+      --radius:      10px;
+      --shadow:      0 4px 24px rgba(11,37,69,.10);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      line-height: 1.6;
+    }
+
+    /* ─── NAV ─────────────────────────────────────── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--blue-dark);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 40px;
+      height: 68px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.3);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .nav-brand .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--blue);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+    }
+
+    .nav-brand span {
+      color: var(--white);
+      font-weight: 700;
+      font-size: 18px;
+      letter-spacing: -.3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: rgba(255,255,255,.80);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+      transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--white); }
+
+    .nav-cta {
+      background: var(--accent) !important;
+      color: var(--blue-dark) !important;
+      font-weight: 700 !important;
+      padding: 10px 20px;
+      border-radius: 6px;
+      font-size: 13px !important;
+    }
+    .nav-cta:hover { opacity: .9; }
+
+    /* ─── HERO ────────────────────────────────────── */
+    .hero {
+      background: linear-gradient(135deg, var(--blue-dark) 0%, var(--blue-mid) 60%, var(--blue) 100%);
+      color: var(--white);
+      padding: 100px 40px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(37,99,235,.35) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(59,130,246,.25) 0%, transparent 40%);
+    }
+
+    .hero-content { position: relative; max-width: 760px; margin: 0 auto; }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(245,158,11,.15);
+      border: 1px solid rgba(245,158,11,.40);
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 600;
+      padding: 6px 16px;
+      border-radius: 50px;
+      margin-bottom: 24px;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 5vw, 56px);
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 span { color: var(--accent); }
+
+    .hero p {
+      font-size: 18px;
+      color: rgba(255,255,255,.80);
+      max-width: 560px;
+      margin: 0 auto 40px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: var(--blue-dark);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px 36px;
+      border: none;
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform .15s, box-shadow .15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(245,158,11,.40); }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--white);
+      font-weight: 600;
+      font-size: 16px;
+      padding: 15px 36px;
+      border: 2px solid rgba(255,255,255,.50);
+      border-radius: var(--radius);
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color .2s, background .2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,.08); }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 60px;
+      margin-top: 64px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,.12);
+      flex-wrap: wrap;
+    }
+
+    .stat { text-align: center; }
+    .stat-number { font-size: 36px; font-weight: 800; color: var(--accent); }
+    .stat-label { font-size: 13px; color: rgba(255,255,255,.65); margin-top: 4px; }
+
+    /* ─── SECTION TITLES ──────────────────────────── */
+    section { padding: 88px 40px; }
+
+    .section-header { text-align: center; max-width: 600px; margin: 0 auto 56px; }
+    .section-tag {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+    .section-header h2 {
+      font-size: clamp(26px, 3.5vw, 38px);
+      font-weight: 800;
+      color: var(--blue-dark);
+      line-height: 1.2;
+      letter-spacing: -.5px;
+    }
+    .section-header p {
+      margin-top: 14px;
+      color: var(--text-light);
+      font-size: 16px;
+    }
+
+    /* ─── SERVICES ────────────────────────────────── */
+    #services { background: var(--blue-pale); }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .service-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(37,99,235,.07);
+      transition: transform .2s, box-shadow .2s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(11,37,69,.14); }
+
+    .service-icon {
+      width: 56px;
+      height: 56px;
+      background: var(--blue-pale);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .service-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 10px;
+    }
+
+    .service-card p {
+      font-size: 14px;
+      color: var(--text-light);
+      line-height: 1.7;
+    }
+
+    .service-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 18px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--blue);
+      text-decoration: none;
+    }
+    .service-link:hover { gap: 10px; }
+
+    /* ─── À PROPOS ────────────────────────────────── */
+    #apropos { background: var(--white); }
+
+    .apropos-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 72px;
+      align-items: center;
+    }
+
+    .apropos-image {
+      position: relative;
+    }
+
+    .apropos-image .img-main {
+      width: 100%;
+      border-radius: 16px;
+      background: linear-gradient(135deg, var(--blue-mid), var(--blue));
+      min-height: 420px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 100px;
+    }
+
+    .badge-experience {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      background: var(--accent);
+      color: var(--blue-dark);
+      border-radius: 12px;
+      padding: 20px 24px;
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+    .badge-experience .big { font-size: 36px; font-weight: 800; display: block; }
+    .badge-experience .small { font-size: 13px; font-weight: 600; }
+
+    .apropos-content .section-header { text-align: left; margin-bottom: 28px; }
+
+    .apropos-content p {
+      color: var(--text-light);
+      font-size: 16px;
+      line-height: 1.8;
+      margin-bottom: 16px;
+    }
+
+    .apropos-list {
+      list-style: none;
+      margin: 24px 0 32px;
+    }
+    .apropos-list li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .apropos-list li::before {
+      content: '✓';
+      width: 24px;
+      height: 24px;
+      background: var(--blue);
+      color: var(--white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ─── URGENCE BANNER ──────────────────────────── */
+    .urgence-banner {
+      background: linear-gradient(90deg, var(--blue-dark) 0%, var(--blue-mid) 100%);
+      color: var(--white);
+      padding: 40px;
+      text-align: center;
+    }
+    .urgence-banner h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+    .urgence-banner p { color: rgba(255,255,255,.75); margin-bottom: 24px; }
+    .urgence-phone {
+      font-size: 36px;
+      font-weight: 800;
+      color: var(--accent);
+      letter-spacing: 1px;
+    }
+
+    /* ─── CONTACT ─────────────────────────────────── */
+    #contact { background: var(--blue-pale); }
+
+    .contact-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 48px;
+      align-items: start;
+    }
+
+    .contact-info h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 24px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 24px;
+      align-items: flex-start;
+    }
+
+    .contact-item-icon {
+      width: 44px;
+      height: 44px;
+      background: var(--blue);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .contact-item-text .label {
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: var(--text-light);
+    }
+    .contact-item-text .value {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      margin-top: 2px;
+    }
+
+    .contact-form {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-form h3 {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--blue-dark);
+      margin-bottom: 28px;
+    }
+
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .form-group label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 12px 16px;
+      border: 2px solid #e2e8f0;
+      border-radius: 8px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      transition: border-color .2s;
+      resize: none;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus {
+      border-color: var(--blue);
+      outline: none;
+    }
+
+    .form-group input::placeholder,
+    .form-group textarea::placeholder { color: #94a3b8; }
+
+    .btn-submit {
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      font-weight: 700;
+      font-size: 16px;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 8px;
+      transition: background .2s, transform .15s;
+    }
+    .btn-submit:hover { background: var(--blue-mid); transform: translateY(-1px); }
+
+    /* ─── FOOTER ──────────────────────────────────── */
+    footer {
+      background: var(--blue-dark);
+      color: rgba(255,255,255,.75);
+      padding: 60px 40px 28px;
+    }
+
+    .footer-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+    }
+
+    .footer-brand p {
+      font-size: 14px;
+      line-height: 1.8;
+      margin-top: 16px;
+      max-width: 260px;
+    }
+
+    .footer-col h4 {
+      color: var(--white);
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a {
+      color: rgba(255,255,255,.65);
+      text-decoration: none;
+      font-size: 14px;
+      transition: color .2s;
+    }
+    .footer-col a:hover { color: var(--white); }
+
+    .footer-bottom {
+      max-width: 1100px;
+      margin: 24px auto 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 13px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    /* ─── RESPONSIVE ──────────────────────────────── */
+    @media (max-width: 900px) {
+      nav { padding: 0 20px; }
+      .nav-links { display: none; }
+
+      .hero { padding: 64px 24px; }
+      .hero-stats { gap: 32px; }
+
+      section { padding: 64px 24px; }
+
+      .apropos-inner {
+        grid-template-columns: 1fr;
+        gap: 48px;
       }
-@media (max-width: 600px) {
+      .badge-experience { bottom: 12px; right: 12px; }
 
-  .menu-section {
-    flex-direction: column;
-  }
-
-  header h1 {
-    font-size: 24px;
-  }
-
-  button {
-    width: 100%;
-  }
-
-}
-      header {
-        background-color: #cc0000;
-        color: white;
-        padding: 30px;
-        text-align: center;
+      .contact-inner {
+        grid-template-columns: 1fr;
       }
 
-      header h1 {
-        margin: 0;
-        font-size: 36px;
-        font-family: 'playfair display', serif;
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
       }
+    }
 
-      header p {
-        margin: 5px 0 0 0;
-        font-size: 19px;
-      }
+    @media (max-width: 600px) {
+      .form-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .urgence-phone { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
 
-      h2 {
-        color: #cc0000;
-        text-align: center;
-        margin-top: 30px;
-      }
+  <!-- ═══ NAVIGATION ═══ -->
+  <nav>
+    <a href="#" class="nav-brand">
+      <div class="logo-icon">🔧</div>
+      <span>Dupont Plomberie</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#apropos">À propos</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="tel:+33123456789" class="nav-cta">📞 01 23 45 67 89</a></li>
+    </ul>
+  </nav>
 
-      /* FLEXBOX - les cartes côte à côte */
-      .menu-section {
-        display: flex;
-        gap: 20px;
-        padding: 20px;
-      }
+  <!-- ═══ HERO ═══ -->
+  <header class="hero">
+    <div class="hero-content">
+      <div class="hero-badge">Intervention rapide — Île-de-France</div>
+      <h1>Votre plombier de<br><span>confiance</span> depuis 1998</h1>
+      <p>Travaux de plomberie, chauffage et sanitaire pour particuliers et professionnels. Devis gratuit sous 24 h.</p>
+      <div class="hero-actions">
+        <a href="#contact" class="btn-primary">Demander un devis gratuit</a>
+        <a href="tel:+33123456789" class="btn-outline">📞 Urgence 24h/7j</a>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-number">25+</div>
+          <div class="stat-label">Années d'expérience</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2 400</div>
+          <div class="stat-label">Clients satisfaits</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">4.9★</div>
+          <div class="stat-label">Note moyenne</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">2 h</div>
+          <div class="stat-label">Délai d'intervention moyen</div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      .carte {
-        background-color: white;
-        border-radius: 10px;
-        padding: 20px;
-        flex: 1;
-        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      }
+  <!-- ═══ SERVICES ═══ -->
+  <section id="services">
+    <div class="section-header">
+      <div class="section-tag">Nos prestations</div>
+      <h2>Des services complets pour tous vos besoins</h2>
+      <p>Nous intervenons sur tous types de travaux de plomberie, du dépannage urgent à l'installation complète.</p>
+    </div>
+    <div class="services-grid">
 
-      .carte h3 {
-        color: #cc0000;
-        border-bottom: 2px solid #cc0000;
-        padding-bottom: 10px;
-      }
-
-      .carte ul {
-        padding-left: 20px;
-      }
-
-      .carte li {
-        margin: 8px 0;
-      }
-
-      .commander {
-        text-align: center;
-        padding: 30px;
-      }
-      .contact {
-  padding: 40px;
-  text-align: center;
-  background-color: white;
-  margin-top: 30px;
-}
-
-.formulaire {
-  display: flex;
-  flex-direction: column;
-  max-width: 500px;
-  margin: 0 auto;
-  gap: 15px;
-}
-
-.formulaire input,
-.formulaire textarea {
-  padding: 12px;
-  border: 2px solid #ddd;
-  border-radius: 5px;
-  font-size: 16px;
-  font-family: 'Lato', sans-serif;
-}
-
-.formulaire input:focus,
-.formulaire textarea:focus {
-  border-color: #cc0000;
-  outline: none;
-}
-      footer {
-  background-color: #333;
-  color: white;
-  text-align: center;
-  padding: 20px;
-  margin-top: 30px;
-}
-      button {
-        background-color: #cc0000;
-        color: white;
-        padding: 15px 40px;
-        border: none;
-        border-radius: 5px;
-        font-size: 18px;
-        cursor: pointer;
-      }
-.apropos {
-  background-color: white;
-  padding: 40px;
-  text-align: center;
-  border-bottom: 3px solid #cc0000;
-}
-.hero img {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-}
-.apropos p {
-  max-width: 600px;
-  margin: 0 auto;
-  line-height: 1.8;
-  color: #555;
-}
-    </style>
-  </head>
-  <body>
-
-    <header>
-      <h1>🍕 AD Pizza</h1>
-      <p>317 route de Darnétal — Tél : 01 23 45 67 89</p>
-    </header>
-    <div class="hero">
-  <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=900" alt="Pizza fraîche">
-</div>
-<section class="apropos">
-  <h2>Notre histoire</h2>
-  <p>AD Pizza, c'est une pizzeria familiale installée route de Darnétal depuis 2010. Nous préparons nos pizzas avec des ingrédients frais sélectionnés chaque matin. Pâte maison, sauce tomate mijotée, fromages affinés — chaque pizza est un voyage en Italie.</p>
-</section>
-    <h2>Notre Menu</h2>
-
-    <div class="menu-section">
-
-      <div class="carte">
-        <h3>Base tomate</h3>
-        <ul>
-          <li>4 fromages</li>
-          <li>Reine</li>
-          <li>Calzone</li>
-          <li>Burger</li>
-        </ul>
+      <div class="service-card">
+        <div class="service-icon">🚿</div>
+        <h3>Plomberie générale</h3>
+        <p>Installation, remplacement et réparation de tuyauteries, robinets, mitigeurs, WC et tous équipements sanitaires.</p>
+        <a href="#contact" class="service-link">En savoir plus →</a>
       </div>
 
-      <div class="carte">
-        <h3>Base crème</h3>
-        <ul>
-          <li>Chèvre miel</li>
-          <li>Savoyarde</li>
-          <li>Forestière</li>
-        </ul>
+      <div class="service-card">
+        <div class="service-icon">🔥</div>
+        <h3>Chauffage & chaudière</h3>
+        <p>Installation et entretien de chaudières gaz, fioul ou à condensation. Maintenance annuelle et remplacement.</p>
+        <a href="#contact" class="service-link">En savoir plus →</a>
       </div>
 
-      <div class="carte">
-        <h3>Base pesto</h3>
-        <ul>
-          <li>Pesto mozzarella</li>
-          <li>Pesto chèvre</li>
-        </ul>
+      <div class="service-card">
+        <div class="service-icon">🛁</div>
+        <h3>Salle de bain clé en main</h3>
+        <p>Conception et rénovation complète : douche à l'italienne, baignoire balnéo, vasque, carrelage et finitions.</p>
+        <a href="#contact" class="service-link">En savoir plus →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">💧</div>
+        <h3>Détection de fuites</h3>
+        <p>Localisation précise sans destruction grâce à nos équipements de détection acoustique et thermique.</p>
+        <a href="#contact" class="service-link">En savoir plus →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">⚡</div>
+        <h3>Urgences 24h/7j</h3>
+        <p>Dégât des eaux, fuite importante, colonne bouchée — nous intervenons dans les 2 heures, 7 jours sur 7.</p>
+        <a href="tel:+33123456789" class="service-link">Appeler maintenant →</a>
+      </div>
+
+      <div class="service-card">
+        <div class="service-icon">🌡️</div>
+        <h3>Climatisation & PAC</h3>
+        <p>Pose et entretien de climatisations réversibles, pompes à chaleur air/air et air/eau pour un confort optimal.</p>
+        <a href="#contact" class="service-link">En savoir plus →</a>
       </div>
 
     </div>
+  </section>
 
-    <div class="commander">
-      <button>Commander</button>
+  <!-- ═══ À PROPOS ═══ -->
+  <section id="apropos">
+    <div class="apropos-inner">
+      <div class="apropos-image">
+        <div class="img-main">🔧</div>
+        <div class="badge-experience">
+          <span class="big">25</span>
+          <span class="small">ans d'expertise</span>
+        </div>
+      </div>
+      <div class="apropos-content">
+        <div class="section-header">
+          <div class="section-tag">À propos</div>
+          <h2>Une entreprise familiale à votre service</h2>
+        </div>
+        <p>Fondée en 1998 par Henri Dupont, Dupont Plomberie est une entreprise artisanale basée à Paris et intervenant sur toute l'Île-de-France. Depuis 25 ans, nous accompagnons particuliers et professionnels dans tous leurs travaux de plomberie.</p>
+        <p>Notre équipe de 8 techniciens certifiés met son savoir-faire au service de chaque chantier, qu'il s'agisse d'un simple dépannage ou d'une rénovation complète. Nous sommes certifiés RGE QualiPAC et qualifiés Qualibat.</p>
+        <ul class="apropos-list">
+          <li>Artisan certifié RGE — éligible aux aides de l'État</li>
+          <li>Devis détaillé gratuit sous 24 heures</li>
+          <li>Garantie décennale sur tous les travaux</li>
+          <li>Équipe disponible 7j/7 pour les urgences</li>
+          <li>Fourniture et pose de matériaux de qualité</li>
+        </ul>
+        <a href="#contact" class="btn-primary">Prendre contact</a>
+      </div>
     </div>
-    <section class="contact">
-  <h2>Nous contacter</h2>
-  <div class="formulaire">
-    <input type="text" placeholder="Votre nom">
-    <input type="email" placeholder="Votre email">
-    <textarea placeholder="Votre message" rows="4"></textarea>
-    <button>Envoyer</button>
+  </section>
+
+  <!-- ═══ BANNIÈRE URGENCE ═══ -->
+  <div class="urgence-banner">
+    <h2>Une urgence plomberie ?</h2>
+    <p>Dégât des eaux, fuite ou canalisation bouchée — nous sommes disponibles 24h/24, 7j/7.</p>
+    <div class="urgence-phone">📞 01 23 45 67 89</div>
   </div>
-</section>
-<footer>
-  <p>📍 317 route de Darnétal, Rouen</p>
-  <p>🕐 Lun-Sam : 11h-14h / 18h-22h</p>
-  <p>📞 01 23 45 67 89</p>
-</footer>
-  </body>
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact">
+    <div class="section-header">
+      <div class="section-tag">Nous contacter</div>
+      <h2>Demandez votre devis gratuit</h2>
+      <p>Répondez à quelques questions et nous vous rappelons sous 24 heures avec un devis personnalisé.</p>
+    </div>
+    <div class="contact-inner">
+
+      <div class="contact-info">
+        <h3>Nos coordonnées</h3>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📍</div>
+          <div class="contact-item-text">
+            <div class="label">Adresse</div>
+            <div class="value">14 rue de la Fontaine<br>75015 Paris</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">📞</div>
+          <div class="contact-item-text">
+            <div class="label">Téléphone</div>
+            <div class="value">01 23 45 67 89</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">✉️</div>
+          <div class="contact-item-text">
+            <div class="label">Email</div>
+            <div class="value">contact@dupont-plomberie.fr</div>
+          </div>
+        </div>
+
+        <div class="contact-item">
+          <div class="contact-item-icon">🕐</div>
+          <div class="contact-item-text">
+            <div class="label">Horaires</div>
+            <div class="value">Lun – Ven : 7h – 20h<br>Sam : 8h – 18h<br>Urgences 24h/7j</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <h3>Décrivez votre projet</h3>
+        <form>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="prenom">Prénom</label>
+              <input type="text" id="prenom" placeholder="Jean">
+            </div>
+            <div class="form-group">
+              <label for="nom">Nom</label>
+              <input type="text" id="nom" placeholder="Martin">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="telephone">Téléphone</label>
+              <input type="tel" id="telephone" placeholder="06 00 00 00 00">
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input type="email" id="email" placeholder="jean.martin@email.com">
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="service">Type de prestation</label>
+            <select id="service">
+              <option value="">Sélectionnez un service…</option>
+              <option>Plomberie générale</option>
+              <option>Chauffage / Chaudière</option>
+              <option>Rénovation salle de bain</option>
+              <option>Détection de fuite</option>
+              <option>Urgence</option>
+              <option>Climatisation / PAC</option>
+              <option>Autre</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Décrivez votre besoin</label>
+            <textarea id="message" rows="4" placeholder="Décrivez brièvement votre projet ou problème…"></textarea>
+          </div>
+          <button type="submit" class="btn-submit">Envoyer ma demande de devis →</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer>
+    <div class="footer-grid">
+
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:10px;">
+          <span style="font-size:28px;">🔧</span>
+          <span style="color:#fff;font-weight:800;font-size:18px;">Dupont Plomberie</span>
+        </div>
+        <p>Artisan plombier certifié RGE intervenant sur Paris et toute l'Île-de-France depuis 1998. Devis gratuit, garantie décennale.</p>
+      </div>
+
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#services">Plomberie générale</a></li>
+          <li><a href="#services">Chauffage & chaudière</a></li>
+          <li><a href="#services">Salle de bain</a></li>
+          <li><a href="#services">Détection de fuites</a></li>
+          <li><a href="#services">Urgences 24h/7j</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Entreprise</h4>
+        <ul>
+          <li><a href="#apropos">À propos</a></li>
+          <li><a href="#contact">Devis gratuit</a></li>
+          <li><a href="#">Certifications</a></li>
+          <li><a href="#">Avis clients</a></li>
+          <li><a href="#">Mentions légales</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+33123456789">📞 01 23 45 67 89</a></li>
+          <li><a href="mailto:contact@dupont-plomberie.fr">✉️ Nous écrire</a></li>
+          <li style="color:rgba(255,255,255,.55);font-size:14px;margin-top:4px;">14 rue de la Fontaine<br>75015 Paris</li>
+        </ul>
+      </div>
+
+    </div>
+    <div class="footer-bottom">
+      <span>© 2024 Dupont Plomberie — Tous droits réservés</span>
+      <span>SIRET : 123 456 789 00012 — RGE QualiPAC — Qualibat</span>
+    </div>
+  </footer>
+
+</body>
 </html>
